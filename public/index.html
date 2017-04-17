@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html>
-
-  <head>
-    <title>NodeJS Starter Application</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="stylesheets/style.css">
-  </head>
-
-  <body>
-    <table>
-      <tr>
-        <td style= "width:30%;">
-          <img class = "newappIcon" src="images/newapp-icon.png">
-        </td>
-        <td>
-          <h1 id="message">Hello World!</h1>
-          <p class='description'></p> Thanks for creating a <span class = "blue">NodeJS Starter Application</span>.
-        </td>
-      </tr>
-    </table>
-  </body>
-
+  <head>
+    <title>NodeJS Starter Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/style.css">
+  </head>
+  <body>
+  <!— Placeholder for chat messages -->
+  <ul id="msgs"></ul>
+  <form>
+    <!— Chat input text field and submit buttion ->
+    <input id="m" /><button type="submit">Send</button>
+  </form>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+/*globals io */
+/*eslint-env jquery */
+  var socket = new io();
+  $("form").submit(function () {
+    socket.emit("P", $("#m").val());
+    $("#m").val("");
+    return false;
+  });
+  socket.on("P", function(msg) {
+    $("#msgs").append($("<li>").text(msg));
+  });
+</script>
+  </body>
 </html>
