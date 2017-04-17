@@ -1,0 +1,8 @@
+applications:
+- path: .
+  memory: 256M
+  instances: 1
+  domain: mybluemix.net
+  name: helloJisoo0417
+  host: helloJisoo0417
+  disk_quota: 1024M
